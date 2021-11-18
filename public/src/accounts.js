@@ -1,5 +1,6 @@
 function findAccountById(accounts, id) {
-  console.log("hello");
+  //find the id in the object that matches the given id
+  return accounts.find((account) => account.id === id);
 }
 
 function sortAccountsByLastName(accounts) {}
