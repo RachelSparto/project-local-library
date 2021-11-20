@@ -11,7 +11,20 @@ function sortAccountsByLastName(accounts) {
   });
 }
 
-function getTotalNumberOfBorrows(account, books) {}
+function getTotalNumberOfBorrows(account, books) {
+  const { id } = account;
+  //look to see how many times a person has borrowed any book
+  //we want to reduce the books object just to look at the borrowed array
+  return books.reduce((ammountOfBooksBorrowedByUser, book) => {
+    const { borrows } = book;
+    for (let borrow of borrows) {
+      if (borrow.id === id) {
+        ammountOfBooksBorrowedByUser++;
+      }
+    }
+    return ammountOfBooksBorrowedByUser;
+  }, 0);
+}
 
 function getBooksPossessedByAccount(account, books, authors) {}
 
