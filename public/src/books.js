@@ -8,7 +8,14 @@ function findBookById(books, id) {
   return books.find((book) => book.id === id);
 }
 
-function partitionBooksByBorrowedStatus(books) {}
+function partitionBooksByBorrowedStatus(books) {
+  //loop through the books array and filter if the book is borrowed
+  const isBorrowed = books.filter((book) => !book.borrows[0].returned);
+  //loop throug the books array and filtter if the book has been returned
+  const isReturned = books.filter((book) => book.borrows[0].returned);
+  //put the two arrays created above together into one array
+  return [isBorrowed, isReturned];
+}
 
 function getBorrowersForBook(book, accounts) {}
 
