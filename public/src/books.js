@@ -17,7 +17,17 @@ function partitionBooksByBorrowedStatus(books) {
   return [isBorrowed, isReturned];
 }
 
-function getBorrowersForBook(book, accounts) {}
+function getBorrowersForBook(book, accounts) {
+  const { borrows } = book;
+  return borrows
+    .map((borrow) => {
+      const { returned, id } = borrow;
+      //loop through the accounts array and find if account id matches an id in the borrows.id
+      const foundAccount = accounts.find((account) => account.id === id);
+      return { ...foundAccount, returned };
+    })
+    .slice(0, 10);
+}
 
 module.exports = {
   findAuthorById,
