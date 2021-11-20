@@ -4,6 +4,7 @@ function findAccountById(accounts, id) {
 }
 
 function sortAccountsByLastName(accounts) {
+  //arrange the account array so that the order is by last name
   return accounts.sort((accountA, accountB) => {
     const lastNameA = accountA.name.last;
     const lastNameB = accountB.name.last;
@@ -28,6 +29,7 @@ function getTotalNumberOfBorrows(account, books) {
 
 function getBooksPossessedByAccount(account, books, authors) {
   const { id } = account;
+  //filter through the books object to find the books that are currently checked out
   const booksPossesed = books.filter((book) => {
     for (let borrow of book.borrows) {
       return borrow.id === id && !borrow.returned;
@@ -35,6 +37,7 @@ function getBooksPossessedByAccount(account, books, authors) {
   });
   return booksPossesed.map((book) => {
     const { authorId } = book;
+    //loop through the author and find if the author id matches and if so add it to the map array
     const foundAuthor = authors.find((author) => authorId === author.id);
     return { ...book, author: { ...foundAuthor } };
   });
