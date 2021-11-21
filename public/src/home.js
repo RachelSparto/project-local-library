@@ -1,4 +1,7 @@
-function getTotalBooksCount(books) {}
+function getTotalBooksCount(books) {
+  //give the length of the boosk array to get total number of books
+  return books.length;
+}
 
 function getTotalAccountsCount(accounts) {}
 
