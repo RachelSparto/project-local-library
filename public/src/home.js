@@ -53,6 +53,7 @@ function getMostPopularAuthors(books, authors) {
     const name = `${first} ${last}`;
     //filter the books array to find all books written by the saem author id
     const booksByAuthor = books.filter((book) => book.authorId === id);
+    //loops through the booksByAuthor array adds together all of the times each book the author has written is borrowed
     const count = booksByAuthor.reduce((booksBorrowed, book) => {
       return booksBorrowed + book.borrows.length;
     }, 0);
@@ -62,6 +63,7 @@ function getMostPopularAuthors(books, authors) {
   return sortByCountAndLimitFiveEntries(popularAuthors);
 }
 
+//helper function that sorts and slices arrays
 function sortByCountAndLimitFiveEntries(array) {
   return array.sort((a, b) => b.count - a.count).slice(0, 5);
 }
