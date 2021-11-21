@@ -41,7 +41,21 @@ function getMostPopularBooks(books) {
   return sortByCountAndLimitFiveEntries(popularBooks);
 }
 
-function getMostPopularAuthors(books, authors) {}
+function getMostPopularAuthors(books, authors) {
+  const popularAuthors = authors.map((author) => {
+    const {
+      name: { first, last },
+      id,
+    } = author;
+    const name = `${first} ${last}`;
+    const booksByAuthor = books.filter((book) => book.authorId === id);
+    const count = booksByAuthor.reduce((booksBorrowed, book) => {
+      return booksBorrowed + book.borrows.length;
+    }, 0);
+    return { name, count };
+  });
+  return sortByCountAndLimitFiveEntries(popularAuthors);
+}
 
 function sortByCountAndLimitFiveEntries(array) {
   return array.sort((a, b) => b.count - a.count).slice(0, 5);
