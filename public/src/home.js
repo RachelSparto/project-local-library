@@ -23,37 +23,42 @@ function getMostCommonGenres(books) {
       genres[book.genre] = genres[book.genre] + 1;
     }
   }
-  //convert object into an array sort from most popular to least and slice to five
-  const genresArray = Object.entries(genres)
-    .sort((genreA, genreB) => genreB[1] - genreA[1])
-    .slice(0, 5);
-  //map the array to set up into proper formating
-  return genresArray.map((genre) => {
-    return { name: genre[0], count: genre[1] };
+  // convert genres to an array
+  const genresArray = Object.entries(genres);
+  // map genresArray to meet formatting requirements.
+  const commonGenres = genresArray.map((genre) => {
+    const [name, count] = genre;
+    return { name, count };
   });
+  return sortByCountAndLimitFiveEntries(commonGenres);
 }
 
 function getMostPopularBooks(books) {
+  //loop through the books array and map out book objects
   const popularBooks = books.map((book) => {
     const { title: name, borrows } = book;
     return { name, count: borrows.length };
   });
+  //helper function used to sort and slice
   return sortByCountAndLimitFiveEntries(popularBooks);
 }
 
 function getMostPopularAuthors(books, authors) {
+  //loop through th eauthors array and map out an author object
   const popularAuthors = authors.map((author) => {
     const {
       name: { first, last },
       id,
     } = author;
     const name = `${first} ${last}`;
+    //filter the books array to find all books written by the saem author id
     const booksByAuthor = books.filter((book) => book.authorId === id);
     const count = booksByAuthor.reduce((booksBorrowed, book) => {
       return booksBorrowed + book.borrows.length;
     }, 0);
     return { name, count };
   });
+  //helper function used to sort and slice
   return sortByCountAndLimitFiveEntries(popularAuthors);
 }
 
