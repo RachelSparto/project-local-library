@@ -33,9 +33,19 @@ function getMostCommonGenres(books) {
   });
 }
 
-function getMostPopularBooks(books) {}
+function getMostPopularBooks(books) {
+  const popularBooks = books.map((book) => {
+    const { title: name, borrows } = book;
+    return { name, count: borrows.length };
+  });
+  return sortByCountAndLimitFiveEntries(popularBooks);
+}
 
 function getMostPopularAuthors(books, authors) {}
+
+function sortByCountAndLimitFiveEntries(array) {
+  return array.sort((a, b) => b.count - a.count).slice(0, 5);
+}
 
 module.exports = {
   getTotalBooksCount,
