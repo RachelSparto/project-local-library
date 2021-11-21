@@ -3,7 +3,10 @@ function getTotalBooksCount(books) {
   return books.length;
 }
 
-function getTotalAccountsCount(accounts) {}
+function getTotalAccountsCount(accounts) {
+  //use length to get the total number of account sin the system
+  return accounts.length;
+}
 
 function getBooksBorrowedCount(books) {}
 
